@@ -242,6 +242,7 @@ def socket_allow_hosts(allowed=None, allow_unix_socket=False):
 
     def guarded_connect(inst, *args):
         host = host_from_connect_args(args)
+        host = normalize_allowed_hosts([host])[0]
         if host in allowed_hosts or (
             _is_unix_socket(inst.family) and allow_unix_socket
         ):
